@@ -1,0 +1,23 @@
+version: 2
+# Once a month, each ecosystem gets one group for minor/patch updates and a separate group for major updates.
+# The cooldown limits updates to versions published at least 7 days ago.
+# Security updates are enabled in the repository settings and are neither grouped nor delayed by the cooldown.
+# Add a block of the same shape for each language ecosystem (cargo, npm, etc.).
+# With a develop branch, add target-branch: develop to each block.
+updates:
+  - package-ecosystem: pip
+    directory: /
+    open-pull-requests-limit: 2
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      pip-monthly:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+      pip-major:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [major]
