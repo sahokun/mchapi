@@ -1,9 +1,10 @@
 version: 2
 # Once a month, each ecosystem gets one group for minor/patch updates and a separate group for major updates.
 # The cooldown limits updates to versions published at least 7 days ago.
-# Security updates are enabled in the repository settings and are neither grouped nor delayed by the cooldown.
+# Security updates (enabled in the repository settings) are grouped into one PR per ecosystem. The cooldown does not
+# apply to them, so they may include versions published less than 7 days ago (check before merging).
 # Add a block of the same shape for each language ecosystem (cargo, npm, etc.).
-# With a develop branch, add target-branch: develop to each block.
+# Do not set target-branch: a block with it no longer applies to security updates, so they would not be grouped.
 updates:
   - package-ecosystem: pip
     directory: /
@@ -13,6 +14,9 @@ updates:
     cooldown:
       default-days: 7
     groups:
+      pip-security:
+        applies-to: security-updates
+        patterns: ["*"]
       pip-monthly:
         applies-to: version-updates
         patterns: ["*"]
